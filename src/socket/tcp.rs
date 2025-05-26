@@ -149,8 +149,8 @@ const RTTE_INITIAL_DEV: u32 = 100;
 // variance gets very low.
 const RTTE_MIN_MARGIN: u32 = 5;
 
-const RTTE_MIN_RTO: u32 = 10000000;
-const RTTE_MAX_RTO: u32 = 10000000;
+const RTTE_MIN_RTO: u32 = 20000;
+const RTTE_MAX_RTO: u32 = 20000;
 
 #[derive(Debug, Clone, Copy)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
