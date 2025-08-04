@@ -188,6 +188,7 @@ impl<K> PacketAssembler<K> {
 
 /// Set holding multiple [`PacketAssembler`].
 #[derive(Debug)]
+#[repr(align(16))]
 pub struct PacketAssemblerSet<K: Eq + Copy> {
     assemblers: [PacketAssembler<K>; REASSEMBLY_BUFFER_COUNT],
 }
@@ -245,13 +246,14 @@ pub(crate) const MAX_DECOMPRESSED_LEN: usize = 1500;
 #[cfg(feature = "_proto-fragmentation")]
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+#[repr(align(16))]
 pub(crate) enum FragKey {
     #[cfg(feature = "proto-ipv4-fragmentation")]
     Ipv4(Ipv4FragKey),
     #[cfg(feature = "proto-sixlowpan-fragmentation")]
     Sixlowpan(SixlowpanFragKey),
 }
-
+#[repr(align(16))]
 pub(crate) struct FragmentsBuffer {
     #[cfg(feature = "proto-sixlowpan")]
     pub decompress_buf: [u8; MAX_DECOMPRESSED_LEN],
@@ -274,6 +276,7 @@ impl Fragmenter {
 }
 
 #[cfg(feature = "_proto-fragmentation")]
+#[repr(align(16))]
 pub(crate) struct Fragmenter {
     /// The buffer that holds the unfragmented 6LoWPAN packet.
     pub buffer: [u8; FRAGMENTATION_BUFFER_SIZE],
@@ -289,6 +292,7 @@ pub(crate) struct Fragmenter {
 }
 
 #[cfg(feature = "proto-ipv4-fragmentation")]
+#[repr(align(16))]
 pub(crate) struct Ipv4Fragmenter {
     /// The IPv4 representation.
     pub repr: Ipv4Repr,
@@ -302,6 +306,7 @@ pub(crate) struct Ipv4Fragmenter {
 }
 
 #[cfg(feature = "proto-sixlowpan-fragmentation")]
+#[repr(align(16))]
 pub(crate) struct SixlowpanFragmenter {
     /// The datagram size that is used for the fragmentation headers.
     pub datagram_size: u16,
