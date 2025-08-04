@@ -178,7 +178,7 @@ impl ops::Sub<Instant> for Instant {
 
 /// A relative amount of time.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
-#[repr(align(16))]
+#[repr(align(64))]
 pub struct Duration {
     micros: u64,
 }
