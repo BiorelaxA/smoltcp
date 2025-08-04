@@ -76,7 +76,7 @@ use check;
 /// The network interface logically owns a number of other data structures; to avoid
 /// a dependency on heap allocation, it instead owns a `BorrowMut<[T]>`, which can be
 /// a `&mut [T]`, or `Vec<T>` if a heap is available.
-#[repr(align(64))]
+
 pub struct Interface {
     pub(crate) inner: InterfaceInner,
     fragments: FragmentsBuffer,
@@ -90,7 +90,7 @@ pub struct Interface {
 /// the `device` mutably until they're used, which makes it impossible to call other
 /// methods on the `Interface` in this time (since its `device` field is borrowed
 /// exclusively). However, it is still possible to call methods on its `inner` field.
-#[repr(align(64))]
+
 pub struct InterfaceInner {
     caps: DeviceCapabilities,
     now: Instant,

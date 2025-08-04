@@ -94,7 +94,7 @@ impl defmt::Format for Pan {
 
 /// A IEEE 802.15.4 address.
 #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy)]
-#[repr(align(64))]
+
 pub enum Address {
     Absent,
     Short([u8; 2]),
