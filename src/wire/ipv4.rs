@@ -37,6 +37,7 @@ pub struct Key {
 
 /// A four-octet IPv4 address.
 #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, Default)]
+#[repr(align(32))]
 pub struct Address(pub [u8; ADDR_SIZE]);
 
 impl Address {
