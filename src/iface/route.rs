@@ -1,5 +1,4 @@
 use heapless::Vec;
-
 use crate::config::IFACE_MAX_ROUTE_COUNT;
 use crate::time::Instant;
 use crate::wire::{IpAddress, IpCidr};
