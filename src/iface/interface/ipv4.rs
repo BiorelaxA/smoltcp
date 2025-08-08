@@ -234,7 +234,7 @@ impl InterfaceInner {
     ) -> Option<EthernetPacket<'frame>> {
         let arp_packet = check!(ArpPacket::new_checked(eth_frame.payload()));
         let arp_repr = check!(ArpRepr::parse(&arp_packet));
-
+        net_debug!("arp: unknown operation code {:?}",arp_repr);
         match arp_repr {
             ArpRepr::EthernetIpv4 {
                 operation,
