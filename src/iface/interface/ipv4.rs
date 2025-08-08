@@ -243,8 +243,10 @@ impl InterfaceInner {
                 target_protocol_addr,
                 ..
             } => {
+                net_debug!("[target_protocol_addr] target_protocol_addr is {:?}",target_protocol_addr);
                 // Only process ARP packets for us.
                 if !self.has_ip_addr(target_protocol_addr) && !self.any_ip {
+                    net_debug!("arp don't has ip addr");
                     return None;
                 }
 
