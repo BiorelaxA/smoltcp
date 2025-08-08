@@ -234,7 +234,7 @@ impl InterfaceInner {
     ) -> Option<EthernetPacket<'frame>> {
         let arp_packet = check!(ArpPacket::new_checked(eth_frame.payload()));
         let arp_repr = check!(ArpRepr::parse(&arp_packet));
-        net_debug!("arp: unknown operation code {:?}",arp_repr);
+        net_debug!("arp: {:?}",arp_repr);
         match arp_repr {
             ArpRepr::EthernetIpv4 {
                 operation,
@@ -269,6 +269,7 @@ impl InterfaceInner {
                 // We fill from requests too because if someone is requesting our address they
                 // are probably going to talk to us, so we avoid having to request their address
                 // when we later reply to them.
+                net_debug!("[process_arp] addr {:?},ethernet {:?}",source_protocol_addr,source_hardware_addr);
                 self.neighbor_cache.fill(
                     source_protocol_addr.into(),
                     source_hardware_addr.into(),
@@ -277,7 +278,7 @@ impl InterfaceInner {
 
                 if operation == ArpOperation::Request {
                     let src_hardware_addr = self.hardware_addr.ethernet_or_panic();
-
+                    net_debug!("[process_arp] send arp reply");
                     Some(EthernetPacket::Arp(ArpRepr::EthernetIpv4 {
                         operation: ArpOperation::Reply,
                         source_hardware_addr: src_hardware_addr,

@@ -17,7 +17,7 @@ impl InterfaceInner {
         {
             return None;
         }
-
+        net_debug!("[process_ethernet] neighbor cache is {:?}",self.neighbor_cache);
         match eth_frame.ethertype() {
             #[cfg(feature = "proto-ipv4")]
             EthernetProtocol::Arp => self.process_arp(self.now, &eth_frame),

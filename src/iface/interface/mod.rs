@@ -531,6 +531,7 @@ impl Interface {
                             frame,
                             &mut self.fragments,
                         ) {
+                            net_debug!("[socket_ingress] ethernet send reponse");
                             if let Err(err) =
                                 self.inner.dispatch(tx_token, packet, &mut self.fragmenter)
                             {
